@@ -1,0 +1,27 @@
+name: 'Freeze Micropython Module'
+author: 'jsimonrichard'
+branding:
+  icon: 'wrench'
+description: 'Freeze a custom module into micropython'
+inputs:
+  filename:
+    description: "Filename for the output firmware"
+    required: true
+    default: "micropython.uf2"
+  path:
+    description: "Path to the module within your github repo"
+    required: true
+    default: "."
+  port:
+    description: "The micropython port to use"
+    required: true
+    default: "rp2"
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        INPUT_FILENAME: ${{ inputs.filename }}
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_PORT: ${{ inputs.port }}
+      run: $GITHUB_ACTION_PATH/entrypoint.sh
