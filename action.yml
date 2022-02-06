@@ -12,16 +12,38 @@ inputs:
     description: "Path to the module within your github repo"
     required: true
     default: "."
+  module:
+    description: "The name of your module"
+    required: true
   port:
     description: "The micropython port to use"
     required: true
     default: "rp2"
+  cachecode:
+    description: "Change this if you need to force the creation of a new cache"
+    required: true
+    default: "1"
 runs:
   using: composite
   steps:
+    - name: Check for cached micropython environment
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: ~/micropython
+        key: ${{ runner.os }}-micropython-${{ inputs.port }}-${{ inputs.module }}-${{ inputs.cachecode }}
+    
+    - name: Build Environment
+      if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      env:
+        INPUT_PORT: ${{ inputs.port }}
+      run: $GITHUB_ACTION_PATH/setup-env.sh
+      
     - shell: bash
       env:
         INPUT_FILENAME: ${{ inputs.filename }}
         INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODULE_NAME: ${{ inputs.module }}
         INPUT_PORT: ${{ inputs.port }}
-      run: $GITHUB_ACTION_PATH/entrypoint.sh
+      run: $GITHUB_ACTION_PATH/build.sh
