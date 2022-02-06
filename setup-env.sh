@@ -2,7 +2,7 @@
 
 # Check port
 if [ $INPUT_PORT != "rp2" ]; then
-    echo "Only the rp2 port is current supported" 1>&2
+    echo "Only the rp2 port is currently supported" 1>&2
     exit 1
 fi
 
