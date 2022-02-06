@@ -33,11 +33,11 @@ runs:
         path: ~/micropython
         key: ${{ runner.os }}-micropython-${{ inputs.port }}-${{ inputs.module }}-${{ inputs.cachecode }}
     
-    - name: Build Environment
-      if: steps.cache.outputs.cache-hit != 'true'
+    - name: Build or Restore Environment
       shell: bash
       env:
         INPUT_PORT: ${{ inputs.port }}
+        CACHE_HIT: ${{ steps.cache.outputs.cache-hit }}
       run: $GITHUB_ACTION_PATH/setup-env.sh
       
     - shell: bash
