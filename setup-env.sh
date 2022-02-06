@@ -10,7 +10,7 @@ if [ $CACHE_HIT == 'true' ]; then
     # Restore the gcc-arm-none-eabi package
     sudo cp --verbose --force --recursive ~/gcc-arm-none-eabi/* /
 
-else;
+else
     # Install arm compiler and prepare cache
     sudo apt install gcc-arm-none-eabi -y
 
