@@ -1,4 +1,4 @@
-# freeze-micropython-module
+# The Create a Frozen Micropython Module Action
 This GitHub Action [freezes custom micropython modules](http://docs.micropython.org/en/v1.9.3/unix/reference/constrained.html?highlight=frozen%20module) into micropython. Currently, only the `rp2` port (and the output filetype `.uf2`) is supported.
 
 ## Usage
