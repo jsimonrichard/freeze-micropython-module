@@ -1,7 +1,8 @@
-name: 'Freeze Micropython Module'
+name: 'Create a Frozen Micropython Module'
 author: 'jsimonrichard'
 branding:
-  icon: 'wrench'
+  icon: 'box'
+  color: 'blue'
 description: 'Freeze a custom module into micropython'
 inputs:
   filename:
